@@ -12,3 +12,42 @@ datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
+
+// =============== this is schema for table Categories ===============
+model Categories {
+  category_id   Int        @id @default(autoincrement())
+  category_name String     @unique @db.VarChar(50)
+  products      Products[]
+}
+
+// ===============  this is schema for table Products  ===============
+model Products {
+  product_id   Int        @id @default(autoincrement())
+  product_name String     @unique @db.VarChar(100)
+  price        Float      @db.DoublePrecision
+  category_id  Int        @unique
+  category     Categories @relation(fields: [category_id], references: [category_id])
+  order        Order[]
+}
+
+// =============== this is schema for table Customers ===============
+model Customers {
+  customer_id Int      @id @default(autoincrement())
+  first_name  String   @db.VarChar(100)
+  last_name   String   @db.VarChar(100)
+  birth       DateTime @db.Date
+  money_spent Float    @db.DoublePrecision
+  Order       Order[]
+}
+
+// =============== this is schema for table Order ===============
+model Order {
+  order_id    Int       @id @default(autoincrement())
+  order_total Float     @db.DoublePrecision
+  order_qty   Int
+  order_date  DateTime  @db.Timestamp()
+  customer_id Int
+  customer    Customers @relation(fields: [customer_id], references: [customer_id])
+  product_id  Int
+  product     Products  @relation(fields: [product_id], references: [product_id])
+}
