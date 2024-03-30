@@ -15,7 +15,7 @@ export const GET = async (req: NextRequest, { params: { id } }: Props) => {
   if (product) {
     return NextResponse.json({
       status: 200,
-      message: "Get product by id",
+      message: `Get product id ${id}`,
       payload: product,
       timestamp: Date.now(),
     });
@@ -23,7 +23,7 @@ export const GET = async (req: NextRequest, { params: { id } }: Props) => {
 
   return NextResponse.json({
     status: 404,
-    message: "Product not found",
+    message: `Product id ${id} not found`,
     timestamp: Date.now(),
   });
 };

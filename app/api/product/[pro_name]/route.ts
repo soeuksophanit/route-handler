@@ -18,7 +18,7 @@ export const GET = async (
   if (product) {
     return NextResponse.json({
       status: 200,
-      message: "Get product by Name",
+      message: `Get product ${pro_name} successfully`,
       payload: product,
       timestamp: Date.now(),
     });
@@ -26,7 +26,7 @@ export const GET = async (
 
   return NextResponse.json({
     status: 404,
-    message: "Product not found",
+    message: `Product ${pro_name} not found`,
     timestamp: Date.now(),
   });
 };
