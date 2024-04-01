@@ -25,7 +25,7 @@ model Products {
   product_id   Int        @id @default(autoincrement())
   product_name String     @unique @db.VarChar(100)
   price        Float      @db.DoublePrecision
-  category_id  Int        @unique
+  category_id  Int
   category     Categories @relation(fields: [category_id], references: [category_id])
   order        Order[]
 }
