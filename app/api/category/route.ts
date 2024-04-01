@@ -6,19 +6,22 @@ interface Category {
   category_name: string;
 }
 
-export const response = <T>(status: number, msg: string, payload: T) => ({
+export const response = <T>(status: number, message: string, payload: T) => ({
   status,
-  msg,
+  message,
   payload,
-  timestamp: Date.now(),
+  timestamp: new Date(),
 });
 
 export const GET = async (req: NextRequest) => {
   const categories = await prisma.categories.findMany();
   return categories.length
-    ? NextResponse.json(response(200, "Get All Categories", categories), {
-        status: 200,
-      })
+    ? NextResponse.json(
+        response(200, `Get All ${categories.length} Categories`, categories),
+        {
+          status: 200,
+        }
+      )
     : NextResponse.json(response(404, "Not Found", categories), {
         status: 404,
       });
