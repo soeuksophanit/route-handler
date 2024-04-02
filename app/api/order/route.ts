@@ -3,9 +3,12 @@ import { NextRequest, NextResponse } from "next/server";
 import { response } from "../category/route";
 
 export interface Order {
+  order_id?: number;
   product_id: number;
   customer_id: number;
   order_qty: number;
+  order_total?: number;
+  order_date?: Date;
 }
 
 export const GET = async (req: NextRequest) => {
