@@ -29,6 +29,14 @@ export const GET = async (req: NextRequest) => {
 
 export const POST = async (req: NextRequest) => {
   const { category_id, product_name, price }: Product = await req.json();
+  const existProduct = await prisma.products.findUnique({
+    where: { product_name: product_name },
+  });
+  if (existProduct) {
+    return NextResponse.json(response(501, `Product is already exist`, []), {
+      status: 501,
+    });
+  }
   if (!category_id || !product_name.length || price <= 0) {
     return NextResponse.json(
       response(501, "Some fields is empty or invalid", []),
