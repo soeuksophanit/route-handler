@@ -76,6 +76,7 @@ export const DELETE = async (req: NextRequest, { params: { id } }: Props) => {
     const deleteCustomer = await prisma.customers.delete({
       where: { customer_id: parseInt(id) },
     });
+
     return NextResponse.json(
       response(
         201,

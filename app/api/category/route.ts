@@ -1,7 +1,7 @@
 import prisma from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 
-interface Category {
+export interface Category {
   category_id?: number;
   category_name: string;
 }
