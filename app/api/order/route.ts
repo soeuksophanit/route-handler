@@ -2,7 +2,7 @@ import prisma from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
 import { response } from "../category/route";
 
-interface Order {
+export interface Order {
   product_id: number;
   customer_id: number;
   order_qty: number;
@@ -39,7 +39,7 @@ export const POST = async (req: NextRequest) => {
           product_id,
           customer_id,
           order_qty,
-          order_date: new Date().toISOString(),
+          order_date: new Date(),
           order_total: product.price * order_qty,
         },
       });
