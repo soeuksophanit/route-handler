@@ -2,7 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { response } from "../category/route";
 import prisma from "@/prisma/client";
 
-interface Customer {
+export interface Customer {
   customer_id?: number;
   first_name: string;
   last_name: string;

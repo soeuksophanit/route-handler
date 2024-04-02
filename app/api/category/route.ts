@@ -6,12 +6,24 @@ interface Category {
   category_name: string;
 }
 
-export const response = <T>(status: number, message: string, payload: T) => ({
-  status,
-  message,
-  payload,
-  timestamp: new Date(),
-});
+export const response = <T = null | []>(
+  status: number,
+  message: string,
+  payload: T
+) => {
+  if (payload && payload != [].length)
+    return {
+      status,
+      message,
+      payload,
+      timestamp: new Date(),
+    };
+  return {
+    status,
+    message,
+    timestamp: new Date(),
+  };
+};
 
 export const GET = async (req: NextRequest) => {
   const categories = await prisma.categories.findMany();
