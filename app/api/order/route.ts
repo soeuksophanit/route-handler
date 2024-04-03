@@ -47,6 +47,13 @@ export const POST = async (req: NextRequest) => {
         },
       });
 
+      const updateCustomerMoney = await prisma.customers.update({
+        where: { customer_id: neworder.customer_id },
+        data: {
+          money_spent: customer.money_spent + neworder.order_total,
+        },
+      });
+
       return NextResponse.json(
         response(
           201,
