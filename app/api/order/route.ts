@@ -63,7 +63,11 @@ export const POST = async (req: NextRequest) => {
   }
 
   return NextResponse.json(
-    response(200, `It seem like ther is no Customer and Product`, []),
+    response(
+      200,
+      `It seem like there is no Customer and Product follow the ID`,
+      []
+    ),
     { status: 200 }
   );
 };

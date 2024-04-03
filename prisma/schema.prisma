@@ -26,7 +26,7 @@ model Products {
   product_name String     @unique @db.VarChar(100)
   price        Float      @db.DoublePrecision
   category_id  Int
-  category     Categories @relation(fields: [category_id], references: [category_id])
+  category     Categories @relation(fields: [category_id], references: [category_id],onDelete: Cascade)
   order        Order[]
 }
 
@@ -47,7 +47,7 @@ model Order {
   order_qty   Int
   order_date  DateTime  @db.Timestamp()
   customer_id Int
-  customer    Customers @relation(fields: [customer_id], references: [customer_id])
+  customer    Customers @relation(fields: [customer_id], references: [customer_id],onDelete: Cascade)
   product_id  Int
-  product     Products  @relation(fields: [product_id], references: [product_id])
+  product     Products  @relation(fields: [product_id], references: [product_id],onDelete: Cascade)
 }

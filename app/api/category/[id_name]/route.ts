@@ -1,6 +1,6 @@
 import prisma from "@/prisma/client";
 import { NextRequest, NextResponse } from "next/server";
-import { response } from "../../category/route";
+import { Category, response } from "../../category/route";
 
 interface Props {
   params: { id_name: string };
@@ -41,12 +41,28 @@ export const GET = async (req: NextRequest, { params: { id_name } }: Props) => {
 };
 
 export const PUT = async (req: NextRequest, { params: { id_name } }: Props) => {
+  let count = 0;
   if (!isNaN(parseInt(id_name))) {
     const category = await prisma.categories.findUnique({
       where: { category_id: parseInt(id_name) },
     });
     if (category) {
       const { name } = await req.json();
+      const existCategory: Category[] = await prisma.categories.findMany();
+      existCategory.map((cate) => {
+        if (cate.category_name === name) {
+          count++;
+          return;
+        }
+      });
+
+      if (count > 0) {
+        return NextResponse.json(
+          response(501, `The name of category is already exist`, []),
+          { status: 501 }
+        );
+      }
+
       const updateCate = await prisma.categories.update({
         where: { category_id: parseInt(id_name) },
         data: {
