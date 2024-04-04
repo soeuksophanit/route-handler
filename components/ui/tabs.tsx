@@ -34,10 +34,10 @@ export const Tabs = ({
   };
 
   return (
-    <>
+    <div className="py-6 sticky top-0 z-10">
       <div
         className={cn(
-          "flex flex-row items-center justify-center my-6 border p-1 mx-auto relative overflow-auto sm:overflow-visible no-visible-scrollbar w-fit rounded-full ",
+          "flex flex-row items-center justify-center border p-1 mx-auto relative overflow-auto sm:overflow-visible no-visible-scrollbar w-fit backdrop-blur-md rounded-full ",
           containerClassName
         )}
       >
@@ -70,6 +70,6 @@ export const Tabs = ({
           </Link>
         ))}
       </div>
-    </>
+    </div>
   );
 };
