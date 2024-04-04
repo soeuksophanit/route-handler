@@ -20,14 +20,17 @@ export const GET = async (req: NextRequest, { params: { id_name } }: Props) => {
       );
     }
   } else {
-    const category = await prisma.categories.findUnique({
+    const category = await prisma.categories.findMany({
       where: {
-        category_name: id_name,
+        category_name: {
+          in: [id_name],
+          mode: "insensitive",
+        },
       },
     });
     if (category) {
       return NextResponse.json(
-        response(200, `Get category by name : ${id_name}`, category),
+        response(200, `Get category by name : ${id_name}`, category[0]),
         { status: 200 }
       );
     }
