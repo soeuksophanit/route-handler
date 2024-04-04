@@ -1,6 +1,6 @@
 import { TableData } from "@/components/Table";
-import { GET_ORDER_URL } from "./URL/url";
 import { Order } from "./api/order/route";
+import { fetchApi } from "@/service/productService";
 
 export interface Responses<T> {
   message: string;
@@ -9,8 +9,7 @@ export interface Responses<T> {
 }
 
 export default async function Home() {
-  const getOrder = await fetch(GET_ORDER_URL, { method: "GET" });
-  const { payload: orders }: Responses<Order[]> = await getOrder.json();
+  const orders = await fetchApi<Order[]>(process.env.ORDER);
   return (
     <main>
       <section className="w-[700px] mx-auto my-6">

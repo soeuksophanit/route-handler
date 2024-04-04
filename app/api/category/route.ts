@@ -47,6 +47,7 @@ export const POST = async (req: NextRequest) => {
     body.map((request) => {
       if (cate.category_name === request.category_name) {
         count++;
+        return;
       }
     });
   });

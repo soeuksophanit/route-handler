@@ -7,14 +7,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { GET_CUSTOMER_URL } from "../URL/url";
-import { Responses } from "../page";
 import { Customer } from "../api/customer/route";
+import { fetchApi } from "@/service/productService";
 
 const ProductPage = async () => {
-  const getCustomer = await fetch(GET_CUSTOMER_URL);
-  const { payload: customers }: Responses<Customer[]> =
-    await getCustomer.json();
+  const customers = await fetchApi<Customer[]>(process.env.CUSTOMER);
   return (
     <Table className="w-[700px] mx-auto my-6">
       <TableCaption>The list of Customer Lists</TableCaption>

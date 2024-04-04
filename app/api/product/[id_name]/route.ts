@@ -20,14 +20,17 @@ export const GET = async (req: NextRequest, { params: { id_name } }: Props) => {
       );
     }
   } else {
-    const product = await prisma.products.findUnique({
+    const product = await prisma.products.findMany({
       where: {
-        product_name: id_name,
+        product_name: {
+          in: [id_name],
+          mode: "insensitive",
+        },
       },
     });
     if (product) {
       return NextResponse.json(
-        response(200, `Get product name ${id_name}`, product)
+        response(200, `Get product name ${id_name}`, product[0])
       );
     }
   }
