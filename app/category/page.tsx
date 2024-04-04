@@ -7,14 +7,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { GET_CATEGORY_URL } from "../URL/url";
-import { Responses } from "../page";
 import { Category } from "../api/category/route";
+import { fetchApi } from "@/service/productService";
 
 const ProductPage = async () => {
-  const getProduct = await fetch(GET_CATEGORY_URL);
-  const { payload: categories }: Responses<Category[]> =
-    await getProduct.json();
+  const categories = await fetchApi<Category[]>(process.env.CATEGORY);
   return (
     <Table className="w-[700px] mx-auto my-6">
       <TableCaption>The list of Category Lists</TableCaption>

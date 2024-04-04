@@ -28,7 +28,7 @@ export const GET = async (req: NextRequest, { params: { id_name } }: Props) => {
         },
       },
     });
-    if (category) {
+    if (category.length > 0) {
       return NextResponse.json(
         response(200, `Get category by name : ${id_name}`, category[0]),
         { status: 200 }
@@ -36,7 +36,7 @@ export const GET = async (req: NextRequest, { params: { id_name } }: Props) => {
     }
   }
   return NextResponse.json(
-    response(404, `Category : ${id_name} was not found`, []),
+    response(404, `Category ID or name : ${id_name} was not found`, []),
     {
       status: 404,
     }

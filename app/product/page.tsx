@@ -7,13 +7,11 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
-import { GET_PRODUCT_URL } from "../URL/url";
-import { Responses } from "../page";
 import { Product } from "../api/product/route";
+import { fetchApi } from "@/service/productService";
 
 const ProductPage = async () => {
-  const getProduct = await fetch(GET_PRODUCT_URL);
-  const { payload: products }: Responses<Product[]> = await getProduct.json();
+  const products = await fetchApi<Product[]>(process.env.PRODUCT);
   return (
     <Table className="w-[700px] mx-auto my-6">
       <TableCaption>The list of Product Lists</TableCaption>
